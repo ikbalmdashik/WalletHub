@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.edit
@@ -82,7 +83,8 @@ class OnboardingFragment : Fragment() {
         binding.btnContinue.setOnClickListener {
             val email = binding.emailInput.text.toString()
             if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                val isEmailExist = email == "e@g.c" // This should be a real API check
+                val emails = setOf("e@g.c", "a@g.c", "i@g.c") // demo emails
+                val isEmailExist = email in emails // This should be a real API check
 
                 if (isEmailExist) {
                     // Create the dialog and set the callback
@@ -134,13 +136,48 @@ class OnboardingFragment : Fragment() {
     private fun createAccountItemView(email: String): View {
         val accountItemView = LayoutInflater.from(requireContext()).inflate(R.layout.saved_account_item, binding.accountListContainer, false)
         val tvEmail = accountItemView.findViewById<TextView>(R.id.accountEmail)
+        val removeIcon = accountItemView.findViewById<ImageView>(R.id.removeIcon)
         tvEmail.text = email
 
         accountItemView.setOnClickListener {
             binding.emailInput.setText(email)
             binding.emailInput.requestFocus()
         }
+
+        removeIcon.setOnClickListener {
+            // 1. Get a reference to SharedPreferences
+            val sharedPref = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+
+            // 2. Read the current set of saved accounts
+            val savedAccounts = sharedPref.getStringSet("saved_accounts", mutableSetOf())?.toMutableSet()
+
+            // 3. Remove the specific email from the set
+            savedAccounts?.remove(email)
+
+            // 4. Save the updated set back to SharedPreferences
+            sharedPref.edit {
+                putStringSet("saved_accounts", savedAccounts)
+            }
+
+            // Optional: Refresh the UI to show the change
+            refreshAccountList()
+        }
         return accountItemView
+    }
+
+    private fun refreshAccountList() {
+        // 1. Clear all existing views from the container
+        binding.accountListContainer.removeAllViews()
+
+        // 2. Get the updated list of accounts from SharedPreferences
+        val sharedPref = requireContext().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val savedAccounts = sharedPref.getStringSet("saved_accounts", mutableSetOf())
+
+        // 3. Loop through the updated list and add a new view for each account
+        savedAccounts?.forEach { email ->
+            val accountItemView = createAccountItemView(email)
+            binding.accountListContainer.addView(accountItemView)
+        }
     }
 
     private fun saveAndNavigateToDashboard(email: String) {

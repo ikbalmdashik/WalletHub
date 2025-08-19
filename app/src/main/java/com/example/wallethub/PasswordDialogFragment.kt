@@ -41,7 +41,7 @@ class PasswordDialogFragment : DialogFragment() {
             binding.tvUsername.text = it
         }
 
-        // 👁️ Toggle password visibility
+        // Toggle password visibility
         binding.etPassword.setOnTouchListener { _, event ->
             val DRAWABLE_END = 2 // index for right drawable
             if (event.action == android.view.MotionEvent.ACTION_UP) {
@@ -56,7 +56,7 @@ class PasswordDialogFragment : DialogFragment() {
             false
         }
 
-        // ✅ Done button
+        // Done button
         binding.btnDone.setOnClickListener {
             val password = binding.etPassword.text.toString()
             binding.tvError.visibility = View.GONE
@@ -64,7 +64,7 @@ class PasswordDialogFragment : DialogFragment() {
             binding.btnRecoverPassword.visibility = View.GONE
 
             if (password.isNotBlank()) {
-                val isVerified = (username == "e@g.c" && password == "123") // mock check
+                val isVerified = (password == "123") // mock check
 
                 if (isVerified) {
                     onPasswordVerified?.invoke(true)
