@@ -1,5 +1,6 @@
 package com.example.wallethub
 
+import Database
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -84,9 +85,9 @@ class OnboardingFragment : Fragment() {
             val email = binding.emailInput.text.toString()
             if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 val emails = setOf("e@g.c", "a@g.c", "i@g.c") // demo emails
-                val isEmailExist = email in emails // This should be a real API check
+                val isEmailExist = Database().getUser(email) // This should be a real API check
 
-                if (isEmailExist) {
+                if (isEmailExist != null) {
                     // Create the dialog and set the callback
                     val pd = PasswordDialogFragment.newInstance(email)
                     pd.onPasswordVerified = { isVerified ->
@@ -188,6 +189,7 @@ class OnboardingFragment : Fragment() {
 
         sharedPref.edit {
             putString("email", email)
+            putString("current_login_email", email)
             putStringSet("saved_accounts", savedAccounts)
         }
 

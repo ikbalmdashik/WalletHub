@@ -1,5 +1,6 @@
 package com.example.wallethub
 
+import Database
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -64,7 +65,7 @@ class PasswordDialogFragment : DialogFragment() {
             binding.btnRecoverPassword.visibility = View.GONE
 
             if (password.isNotBlank()) {
-                val isVerified = (password == "123") // mock check
+                val isVerified = (Database().validateLogin(username, password))
 
                 if (isVerified) {
                     onPasswordVerified?.invoke(true)
@@ -82,7 +83,7 @@ class PasswordDialogFragment : DialogFragment() {
             }
         }
 
-        // ❌ Close button
+        // Close button
         binding.btnClose.setOnClickListener {
             onClosed?.invoke()
             dismiss()

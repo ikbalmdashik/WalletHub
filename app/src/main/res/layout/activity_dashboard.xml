@@ -9,7 +9,7 @@
     android:background="@drawable/bg_gradient"
     tools:context=".DashboardActivity">
 
-    <!-- Balance Card Section - Now includes greeting and profile picture -->
+    <!-- Balance Card Section -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardBalance"
         android:layout_width="0dp"
@@ -25,38 +25,39 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
+            android:id="@+id/profile_section"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center_horizontal">
+            android:padding="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <!-- Profile Picture -->
                 <ImageView
                     android:id="@+id/ivProfile"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_account_circle"
                     android:contentDescription="Profile Picture"
+                    android:src="@drawable/ic_account_circle"
                     app:tint="#FFFFFF" />
 
                 <!-- Greeting TextView -->
                 <TextView
-                    android:id="@+id/tvGreeting"
+                    android:id="@+id/tvUsername"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="16dp"
+                    android:layout_weight="1"
                     android:text="User Name"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Balance TextView -->
@@ -64,15 +65,16 @@
                 android:id="@+id/tvBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="$1,250.00"
                 android:textColor="#FFFFFF"
                 android:textSize="38sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"/>
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Quick Actions/Features Section -->
+    <!-- Features Section -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/featuresContainer"
         android:layout_width="0dp"
@@ -84,8 +86,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
-        <!-- First Row of Features -->
-        <!-- Send Money -->
+        <!-- Row 1 -->
         <LinearLayout
             android:id="@+id/sendMoney"
             android:layout_width="0dp"
@@ -113,7 +114,6 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Make Payment -->
         <LinearLayout
             android:id="@+id/makePayment"
             android:layout_width="0dp"
@@ -141,7 +141,6 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Cashout -->
         <LinearLayout
             android:id="@+id/cashout"
             android:layout_width="0dp"
@@ -169,8 +168,7 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Second Row of Features -->
-        <!-- Request Money -->
+        <!-- Row 2 -->
         <LinearLayout
             android:id="@+id/requestMoney"
             android:layout_width="0dp"
@@ -198,7 +196,6 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Add Money -->
         <LinearLayout
             android:id="@+id/addMoney"
             android:layout_width="0dp"
@@ -226,7 +223,6 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Statements -->
         <LinearLayout
             android:id="@+id/statements"
             android:layout_width="0dp"
@@ -254,8 +250,7 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Third Row of Features -->
-        <!-- Bills -->
+        <!-- Row 3 -->
         <LinearLayout
             android:id="@+id/bills"
             android:layout_width="0dp"
@@ -283,7 +278,6 @@
                 android:textSize="14sp"/>
         </LinearLayout>
 
-        <!-- Scan & Pay -->
         <LinearLayout
             android:id="@+id/scanPay"
             android:layout_width="0dp"
@@ -312,5 +306,16 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- The FragmentContainerView to be displayed. -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
