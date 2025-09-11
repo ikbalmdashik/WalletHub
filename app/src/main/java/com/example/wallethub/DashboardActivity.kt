@@ -1,6 +1,7 @@
 package com.example.wallethub
 
 import Database
+import SendmoneyFragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -62,6 +63,23 @@ class DashboardActivity : AppCompatActivity() {
                 // press the back button to navigate back to the previous screen.
                 addToBackStack(null)
             }
+        }
+
+        binding.sendMoney.setOnClickListener {
+            binding.fragmentContainer.visibility = View.VISIBLE
+            binding.featuresContainer.visibility = View.GONE
+            binding.cardBalance.visibility = View.GONE
+
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_right,  // enter
+                    R.anim.slide_out_left,  // exit
+                    R.anim.slide_in_left,   // pop enter
+                    R.anim.slide_out_right  // pop exit
+                )
+                .replace(R.id.fragment_container, SendmoneyFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         // Use OnBackPressedDispatcher for modern back press handling

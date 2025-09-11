@@ -4,6 +4,7 @@ import Database
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
@@ -119,7 +120,7 @@ class PasswordDialogFragment : DialogFragment() {
     companion object {
         const val TAG = "PasswordDialogFragment"
 
-        fun newInstance(username: String): PasswordDialogFragment {
+        fun newInstance(username: String?): PasswordDialogFragment {
             val fragment = PasswordDialogFragment()
             val args = Bundle()
             args.putString("username", username)
