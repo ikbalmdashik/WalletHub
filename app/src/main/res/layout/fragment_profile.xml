@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
-        tools:context=".ProfileFragment">
+        tools:context=".views.ProfileFragment">
 
         <!-- Header section with user info and an edit icon -->
         <LinearLayout

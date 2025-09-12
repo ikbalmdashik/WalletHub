@@ -1,12 +1,15 @@
+package com.example.wallethub.views
+
+import Database
 import android.content.Context
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.wallethub.PasswordDialogFragment
 import com.example.wallethub.R
 import com.example.wallethub.databinding.FragmentSendmoneyBinding
 
@@ -44,7 +47,7 @@ class SendmoneyFragment : Fragment() {
         when (currentStep) {
             1 -> {
                 val email = binding.receiverEmailInput.text.toString().trim()
-                if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     binding.receiverEmailInput.error = "Please enter a valid email address."
                     return
                 }

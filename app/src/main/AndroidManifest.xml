@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.wallethub"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WalletHub">
         <activity
-            android:name=".DashboardActivity"
+            android:name=".views.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".views.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

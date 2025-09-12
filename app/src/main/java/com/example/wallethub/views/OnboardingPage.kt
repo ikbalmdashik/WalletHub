@@ -1,4 +1,4 @@
-package com.example.wallethub
+package com.example.wallethub.views
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,8 +1,10 @@
-package com.example.wallethub
+package com.example.wallethub.views
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.wallethub.views.OnboardingFragment
+import com.example.wallethub.views.OnboardingPage
 
 class OnboardingPagerAdapter(
     fa: FragmentActivity,
@@ -19,6 +21,6 @@ class OnboardingPagerAdapter(
             page.isFirstPage = true
         }
 
-        return OnboardingFragment.newInstance(page)
+        return OnboardingFragment.Companion.newInstance(page)
     }
 }
